@@ -1,0 +1,36 @@
+version: "3"
+
+networks:
+  web:
+    external: true
+  internal:
+    external: false
+
+services:
+  web:
+    build: ./frontend
+    environment:
+      - REACT_APP_API_URL=https://api.nkh1798.info
+    labels:
+      - traefik.http.routers.web.rule=Host(`nkh1798.info`)
+      - traefik.http.routers.web.tls=true
+      - traefik.http.routers.web.tls.certresolver=lets-encrypt
+      - traefik.port=80
+    networks:
+      - internal
+      - web
+    depends_on:
+      - api
+    restart: always
+
+  api:
+    build: ./backend
+    labels:
+      - traefik.http.routers.api.rule=Host(`api.nkh1798.info`)
+      - traefik.http.routers.api.tls=true
+      - traefik.http.routers.api.tls.certresolver=lets-encrypt
+      - traefik.port=3030
+    networks:
+      - internal
+      - web
+    restart: always

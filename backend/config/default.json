@@ -1,0 +1,33 @@
+{
+  "host": "localhost",
+  "port": 3030,
+  "public": "../public/",
+  "paginate": {
+    "default": 10,
+    "max": 100
+	},
+  "authentication": {
+    "entity": "user",
+    "service": "users",
+    "secret": "/pFpTMfSeMWp6id2z30RF+iXfEU=",
+    "authStrategies": [
+      "jwt",
+      "local"
+    ],
+    "jwtOptions": {
+      "header": {
+        "typ": "access"
+      },
+      "audience": "https://yourdomain.com",
+      "issuer": "feathers",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    },
+    "local": {
+      "usernameField": "username",
+      "passwordField": "password"
+    }
+  },
+  // "mongodb": "mongodb://tunguyen27:Aa%40123456@ds119374.mlab.com:19374/course_sale_onl"
+  "mongodb": "mongodb://localhost:27017/course_sale_onl"
+}
